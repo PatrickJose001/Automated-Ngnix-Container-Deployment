@@ -26,8 +26,8 @@ resource "azurerm_container_group" "${unique_name}" {
 
   image_registry_credential {
     server   = "index.docker.io"
-    username = var.docker_username
-    password = var.docker_password
+    username = var.DOCKER_USERNAME
+    password = var.DOCKER_PASSWORD
 }
 
 
