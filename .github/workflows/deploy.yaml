@@ -3,19 +3,11 @@ name: Deploy New Nginx Instance
 on:
   workflow_dispatch:  # Manual trigger
 
-env:
-  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  # DOCKER_USERNAME: "patrickjose00"
-  # DOCKER_PASSWORD: "Patr-263000"
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: development
-    secrets: inherit
+    environment: development  # Reference the environment here
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -29,15 +21,15 @@ jobs:
       working-directory: ./scripts
       run: python container_name_generator.py
 
-    # Debugging step to print environment variables
-    - name: Debug Environment Variables
+    # Debugging step to print secrets
+    - name: Debug Secrets
       run: |
-        echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
-        echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
-        echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
-        echo "ARM_TENANT_ID: $ARM_TENANT_ID"
-        # echo "DOCKER_USERNAME: $DOCKER_USERNAME"
-        # echo "DOCKER_PASSWORD: $DOCKER_PASSWORD"
+        echo "ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}"
+        echo "ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}"
+        echo "ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}"
+        echo "ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}"
+        echo "DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}"
+        echo "DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}"
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
@@ -50,4 +42,11 @@ jobs:
 
     - name: Terraform Apply
       working-directory: ./terraform
-      run: terraform apply -auto-approve
+      run: |
+        terraform apply -auto-approve \
+          -var="ARM_CLIENT_ID=${{ secrets.ARM_CLIENT_ID }}" \
+          -var="ARM_CLIENT_SECRET=${{ secrets.ARM_CLIENT_SECRET }}" \
+          -var="ARM_SUBSCRIPTION_ID=${{ secrets.ARM_SUBSCRIPTION_ID }}" \
+          -var="ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }}" \
+          -var="DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" \
+          -var="DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}"
