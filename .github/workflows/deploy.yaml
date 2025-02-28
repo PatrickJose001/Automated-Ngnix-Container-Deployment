@@ -3,6 +3,12 @@ name: Deploy New Nginx Instance
 on:
   workflow_dispatch:  # Manual trigger
 
+env:
+  ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -39,11 +45,4 @@ jobs:
 
     - name: Terraform Apply
       working-directory: ./terraform
-      env:
-        TF_VAR_AZ_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
-        TF_VAR_AZ_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
-        TF_VAR_AZ_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-        TF_VAR_AZ_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
-        TF_VAR_DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        TF_VAR_DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: terraform apply -auto-approve
