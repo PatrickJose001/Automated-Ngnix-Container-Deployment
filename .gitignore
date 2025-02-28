@@ -1,0 +1,14 @@
+# Local Terraform directories
+.terraform/
+.terraform.lock.hcl
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
+
+# Sensitive environment variable files
+.envrc
+.env
+
+# Python virtual environments (if you're using Python scripts)
+venv/
