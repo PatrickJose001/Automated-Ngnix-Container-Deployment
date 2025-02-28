@@ -24,12 +24,5 @@ resource "azurerm_container_group" "${unique_name}" {
     environment = "development"
   }
 
-  image_registry_credential {
-    server   = "index.docker.io"
-    username = var.DOCKER_USERNAME
-    password = var.DOCKER_PASSWORD
-}
-
-
   depends_on = [azurerm_subnet.aci_subnet]  # Ensures subnet is created before the container group
 }
