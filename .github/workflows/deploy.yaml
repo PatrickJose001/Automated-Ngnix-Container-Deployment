@@ -4,10 +4,10 @@ on:
   workflow_dispatch:  # Manual trigger
 
 env:
-  ARM_CLIENT_ID: "d49e0677-a3eb-4c1d-bddf-be2566f78fc8"
-  ARM_CLIENT_SECRET: "zVV8Q~YsOtaRyv.UcLeY_IvOw2Wo1VDWDtmczben"
-  ARM_SUBSCRIPTION_ID: "c48e1843-581b-445f-9b67-3a934f12a3b7"
-  ARM_TENANT_ID: "3e5db59a-3119-4c94-8da9-4601d89ad630"
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
   # DOCKER_USERNAME: "patrickjose00"
   # DOCKER_PASSWORD: "Patr-263000"
 
