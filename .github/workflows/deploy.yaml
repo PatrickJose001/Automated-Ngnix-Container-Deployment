@@ -14,7 +14,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    environment: development
+    secrets: inherit
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
