@@ -31,19 +31,19 @@ jobs:
     - name: Terraform Init
       working-directory: ./terraform
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZCLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
+        client_id: ${{ secrets.AZ_CLIENT_ID }}
+        client_secret: ${{ secrets.AZCLIENT_SECRET }}
+        subscription_id: ${{ secrets.AZ_SUBSCRIPTION_ID }}
+        tenant_id: ${{ secrets.AZ_TENANT_ID }}
       run: terraform init
 
     - name: Terraform Apply
       working-directory: ./terraform
       env:
-        ARM_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
-        TF_VAR_docker_username: ${{ secrets.DOCKER_USERNAME }}
-        TF_VAR_docker_password: ${{ secrets.DOCKER_PASSWORD }}
+        client_id: ${{ secrets.AZ_CLIENT_ID }}
+        client_secret: ${{ secrets.AZ_CLIENT_SECRET }}
+        subscription_id: ${{ secrets.AZ_SUBSCRIPTION_ID }}
+        tenant_id: ${{ secrets.AZ_TENANT_ID }}
+        docker_username: ${{ secrets.DOCKER_USERNAME }}
+        docker_password: ${{ secrets.DOCKER_PASSWORD }}
       run: terraform apply -auto-approve
