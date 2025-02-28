@@ -1,7 +1,6 @@
-variable "docker_username" {}
-variable "docker_password" {}
-variable "subscription_id" {}
-variable "client_id" {}
-variable "client_secret" {}
-variable "tenant_id" {}
-
+variable "DOCKER_USERNAME" {}
+variable "DOCKER_PASSWORD" {}
+variable "AZURE_CLIENT_ID" {}
+variable "AZURE_CLIENT_SECRET" {}
+variable "AZURE_TENANT_ID" {}
+variable "AZURE_SUBSCRIPTION_ID" {}

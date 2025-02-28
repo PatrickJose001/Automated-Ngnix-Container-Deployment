@@ -1,8 +1,8 @@
 provider "azurerm" {
   features {}
 
-  subscription_id = var.subscription_id
-  client_id       = var.client_id
-  client_secret   = var.client_secret
-  tenant_id       = var.tenant_id
+  client_id       = var.AZURE_CLIENT_ID
+  client_secret   = var.AZURE_CLIENT_SECRET
+  tenant_id       = var.AZURE_TENANT_ID
+  subscription_id = var.AZURE_SUBSCRIPTION_ID
 }
