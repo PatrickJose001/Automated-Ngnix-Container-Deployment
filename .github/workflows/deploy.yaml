@@ -13,10 +13,7 @@ env:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
-    secrets: inherit  # This is where you inherit the secrets for the job
-
+  
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
