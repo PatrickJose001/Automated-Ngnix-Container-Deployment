@@ -1,7 +1,7 @@
 
 
 resource "azurerm_container_group" "instance1" {
-  name                = "instance1-5h1cmlt0"
+  name                = "instance1-dfhs928f"
   location            = azurerm_resource_group.nginx_rg.location
   resource_group_name = azurerm_resource_group.nginx_rg.name
   os_type             = "Linux"
