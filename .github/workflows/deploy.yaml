@@ -8,7 +8,9 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
-  
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,9 +26,6 @@ jobs:
 
     - name: Generate Terraform Configuration
       working-directory: ./scripts
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: python container_name_generator.py
 
     - name: Set up Terraform
@@ -36,11 +35,6 @@ jobs:
 
     - name: Terraform Init
       working-directory: ./terraform
-      env:
-        TF_VAR_AZ_CLIENT_ID: ${{ secrets.AZ_CLIENT_ID }}
-        TF_VAR_AZURE_CLIENT_SECRET: ${{ secrets.AZ_CLIENT_SECRET }}
-        TF_VAR_AZURE_SUBSCRIPTION_ID: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-        TF_VAR_AZURE_TENANT_ID: ${{ secrets.AZ_TENANT_ID }}
       run: terraform init
 
     - name: Terraform Apply
